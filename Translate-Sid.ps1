@@ -43,6 +43,6 @@ Function Translate-SID {
     $objUser = $objSID.Translate([System.Security.Principal.NTAccount]) 
     $unknownDomain = $objSID.AccountDomainSid.value
     $unknownUser = $objUser.value
-    Get-ADDomain -Identity $unknownDomain -server ad.urscorp.com
+    Get-ADDomain -Identity $unknownDomain -server ad.example.com
   }
 }
