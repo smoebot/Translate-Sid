@@ -29,6 +29,8 @@ Function Translate-SID {
   $localSite = (Get-ADDomainController -Discover).Site; $newTargetGC = Get-ADDomainController -Discover -Service 6 -SiteName $localSite
   If (!$newTargetGC) {$newTargetGC = Get-ADDomainController -Discover -Service 6 -NextClosestSite}; $localGC = "$($newTargetGC.HostName)" + ":3268"
   $sidResult = (Get-ADObject –IncludeDeletedObjects -Filter "objectSid -eq '$sid'" -properties name, objectclass, isdeleted, modified, objectguid -server $localGC); $guid = $sidResult.objectguid.guid
+  else () # Some error handling needed here
+  
   if ($sidResult.ObjectClass -eq "user") {
     $userInfo = Get-AdUser -Filter {ObjectGUID -eq $guid} -server $localGC -properties Name, ObjectGUID, DistinguishedName, City, Co, Department, mail, Manager, Title, UserPrincipalName, msExchExtensionAttribute31, msExchExtensionAttribute32, SamAccountName, PasswordLastSet, TelephoneNumber, LastLogonDate, Enabled, WhenCreated
     $userInfo
@@ -43,6 +45,6 @@ Function Translate-SID {
     $objUser = $objSID.Translate([System.Security.Principal.NTAccount]) 
     $unknownDomain = $objSID.AccountDomainSid.value
     $unknownUser = $objUser.value
-    Get-ADDomain -Identity $unknownDomain -server ad.example.com
+    Get-ADDomain -Identity $unknownDomain -server <Server name> # This might be useful in situations were a SID might be from an isolated domain that isn't searched above
   }
 }
