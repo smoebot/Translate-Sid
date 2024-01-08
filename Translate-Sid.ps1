@@ -5,7 +5,7 @@ Function Translate-SID {
     .DESCRIPTION
         Connects to AD and translates SID via Get-AD-Object, then performs more lookups depending on object class
     .PARAMETER sid
-        The sid of the AD-Onject that you are looking up
+        The sid of the AD-Object that you are looking up
     .INPUTS
         String
     .OUTPUTS
