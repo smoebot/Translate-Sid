@@ -1,4 +1,5 @@
 # Translate-Sid
+Powershell. 
 Connects to AD and translates SID via Get-AD-Object, then performs more lookups depending on user or group object class
 
 ---
