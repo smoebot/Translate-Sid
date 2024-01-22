@@ -1,5 +1,6 @@
 # Translate-Sid
-Powershell. 
+Powershell. Determines User or Group information from a given SID
+
 Connects to AD and translates SID via Get-AD-Object, then performs more lookups depending on user or group object class
 
 ---
